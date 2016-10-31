@@ -3,11 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.vaadin</groupId>
     <artifactId>i18n</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
     <properties>
+        <project.build.encoding>UTF-8</project.build.encoding>
+        <project.build.target>1.7</project.build.target>
+        <project.build.source>1.7</project.build.source>
+        <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
+        <Implementation-Title>Internationalization for Vaadin</Implementation-Title>
+        <maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <java-source.version>1.6</java-source.version>
+        <java-target.version>1.6</java-target.version>
         <vaadin.version>[7.6.0,)</vaadin.version>
         <servlet-api.version>[2.5,)</servlet-api.version>
     </properties>
@@ -25,4 +35,23 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+            </resource>
+        </resources>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java-source.version}</source>
+                    <target>${java-target.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

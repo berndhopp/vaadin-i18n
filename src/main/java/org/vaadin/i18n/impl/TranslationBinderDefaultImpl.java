@@ -13,10 +13,8 @@ public class TranslationBinderDefaultImpl implements TranslationBinder {
 
     private final Translator translator;
 
-    private final class TranslatedComponentSet extends HashMap<Component, String> {}
-
     public TranslationBinderDefaultImpl(Translator translator) {
-        if(translator == null) throw new IllegalArgumentException("translator cannot be null");
+        if (translator == null) throw new IllegalArgumentException("translator cannot be null");
 
         this.translator = translator;
     }
@@ -24,27 +22,30 @@ public class TranslationBinderDefaultImpl implements TranslationBinder {
     public void bind() {
         TranslatedComponentSet translatedComponentSet = VaadinSession.getCurrent().getAttribute(TranslatedComponentSet.class);
 
-        if(translatedComponentSet != null) {
+        if (translatedComponentSet != null) {
             for (Map.Entry<Component, String> entry : translatedComponentSet.entrySet()) {
                 final String template = entry.getValue();
                 final Component component = entry.getKey();
-
                 component.setCaption(translator.translate(template));
             }
         }
     }
 
     public void register(Component component, String template) {
-        if(component == null) throw new IllegalArgumentException("component cannot be null");
-        if(template == null || template.equals("")) throw new IllegalArgumentException("template cannot be null or empty");
+        if (component == null) throw new IllegalArgumentException("component cannot be null");
+        if (template == null || template.equals(""))
+            throw new IllegalArgumentException("template cannot be null or empty");
 
-        TranslatedComponentSet restrictedComponentsSet = VaadinSession.getCurrent().getAttribute(TranslatedComponentSet.class);
+        TranslatedComponentSet translatedComponentSet = VaadinSession.getCurrent().getAttribute(TranslatedComponentSet.class);
 
-        if(restrictedComponentsSet == null){
-            restrictedComponentsSet = new TranslatedComponentSet();
-            VaadinSession.getCurrent().setAttribute(TranslatedComponentSet.class, restrictedComponentsSet);
+        if (translatedComponentSet == null) {
+            translatedComponentSet = new TranslatedComponentSet();
+            VaadinSession.getCurrent().setAttribute(TranslatedComponentSet.class, translatedComponentSet);
         }
 
-        restrictedComponentsSet.put(component, template);
+        translatedComponentSet.put(component, template);
+    }
+
+    private final class TranslatedComponentSet extends HashMap<Component, String> {
     }
 }
