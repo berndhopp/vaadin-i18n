@@ -5,41 +5,28 @@ import com.vaadin.server.VaadinSession;
 import org.vaadin.i18n.api.Translator;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import static java.util.ResourceBundle.getBundle;
 
 public class ResourceBundleTranslator implements Translator {
 
-    private static final Locale DEFAULT_FALLBACK_LOCALE = Locale.ENGLISH;
     private final String resourceBundleName;
-    private final Locale defaultLocale;
     private final ClassLoader classLoader;
 
     public ResourceBundleTranslator(String resourceBundleName) {
-        this(resourceBundleName, DEFAULT_FALLBACK_LOCALE, ClassLoader.getSystemClassLoader());
-    }
-
-    public ResourceBundleTranslator(String resourceBundleName, Locale defaultLocale) {
-        this(resourceBundleName, defaultLocale, ClassLoader.getSystemClassLoader());
+        this(resourceBundleName, ClassLoader.getSystemClassLoader());
     }
 
     public ResourceBundleTranslator(String resourceBundleName, ClassLoader classLoader) {
-        this(resourceBundleName, DEFAULT_FALLBACK_LOCALE, classLoader);
-    }
-
-    public ResourceBundleTranslator(String resourceBundleName, Locale defaultLocale, ClassLoader classLoader) {
         if (resourceBundleName == null)
             throw new IllegalArgumentException("resourceBundleName cannot be null");
 
         if (resourceBundleName.isEmpty())
             throw new IllegalArgumentException("resourceBundleName cannot be empty");
 
-        if (defaultLocale == null)
-            throw new IllegalArgumentException("defaultLocale cannot be null");
-
         if (classLoader == null)
             throw new IllegalArgumentException("classLoader cannot be null");
 
-        this.defaultLocale = defaultLocale;
         this.classLoader = classLoader;
         this.resourceBundleName = resourceBundleName;
     }
@@ -52,11 +39,14 @@ public class ResourceBundleTranslator implements Translator {
 
         Locale locale = VaadinSession.getCurrent().getLocale();
 
-        if (locale == null)
-            locale = defaultLocale;
+        if(locale == null) {
+            locale = Locale.getDefault();
 
-        final ResourceBundle bundle = ResourceBundle.getBundle(resourceBundleName, locale, classLoader);
+            if(locale == null){
+                throw new IllegalStateException("no locale in current VaadinSession and no default Locale set");
+            }
+        }
 
-        return bundle.getString(template);
+        return getBundle(resourceBundleName, locale, classLoader).getString(template);
     }
 }
