@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.vaadin</groupId>
     <artifactId>i18n</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.encoding>UTF-8</project.build.encoding>
-        <project.build.target>1.7</project.build.target>
-        <project.build.source>1.7</project.build.source>
+        <project.build.target>1.6</project.build.target>
+        <project.build.source>1.6</project.build.source>
         <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
         <Implementation-Title>Internationalization for Vaadin</Implementation-Title>
         <maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
