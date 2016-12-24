@@ -2,16 +2,17 @@ package org.vaadin.i18n.annotation;
 
 import com.vaadin.ui.Component;
 
+import org.vaadin.i18n.api.Translator;
+
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.vaadin.i18n.api.TranslationBinder;
-import org.vaadin.i18n.api.Translator;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@Inherited
 /**
  * This annotation binds vaadin-i18n to Dependency-Injection frameworks like Spring, Guice or Java CDI.
  * It may be attached to a {@link com.vaadin.ui.Component} that needs its {@link Component#getCaption()}
