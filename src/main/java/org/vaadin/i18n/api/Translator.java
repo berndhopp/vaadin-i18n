@@ -4,6 +4,8 @@ import com.vaadin.ui.Component;
 
 import org.vaadin.i18n.annotation.Caption;
 
+import java.util.Collection;
+
 /**
  * Translator is a provider of translations for any input String, which may or may not be dependent
  * on the current context. The Translator itself is responsible of choosing the correct current
@@ -18,7 +20,8 @@ public interface Translator {
      * @param template the 'template' is supplied by {@link Caption#value()} or {@link TranslationBinder#register(Component, String)},
      *                 and is not restricted in any way. It may or may not contain parameters, that the Translator has to
      *                 resolve
+     * @param parameters the parameters for this template
      * @return the translation
      */
-    String translate(String template);
+    String translate(String template, Collection<Object> parameters);
 }
