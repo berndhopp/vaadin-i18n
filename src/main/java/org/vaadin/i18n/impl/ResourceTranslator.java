@@ -9,19 +9,26 @@ import java.util.ResourceBundle;
 
 import static java.lang.String.format;
 
+/**
+ * a 'default'- or reference-implementation of a translator that
+ * uses resource-bundles
+ */
 public class ResourceTranslator implements Translator {
 
     private final String resourceName;
     private Locale oldLocale;
     private ResourceBundle resourceBundle;
 
-    public ResourceTranslator(String resourceName) {
+    /**
+     * @param resourceBundle the name of the {@link ResourceBundle} to use
+     */
+    public ResourceTranslator(String resourceBundle) {
 
-        if (resourceName == null || resourceName.isEmpty()) {
+        if (resourceBundle == null || resourceBundle.isEmpty()) {
             throw new IllegalArgumentException("resourceName cannot be null or empty");
         }
 
-        this.resourceName = resourceName;
+        this.resourceName = resourceBundle;
     }
 
     @Override
