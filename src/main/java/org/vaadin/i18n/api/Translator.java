@@ -15,9 +15,10 @@ public interface Translator {
     /**
      * translate the 'template' to the correct translation.
      *
-     * @param template the 'template' is supplied by {@link Caption#value()} or {@link TranslationBinder#register(Component, String)},
-     *                 and is not restricted in any way. It may or may not contain parameters, that the Translator has to
-     *                 resolve
+     * @param template   the 'template' is supplied by {@link Caption#value()} or {@link
+     *                   TranslationBinder#register(Component, String)}, and is not restricted in
+     *                   any way. It may or may not contain parameters, that the Translator has to
+     *                   resolve
      * @param parameters the parameters for this template
      * @return the translation
      */

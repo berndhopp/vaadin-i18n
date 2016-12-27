@@ -26,8 +26,8 @@ public class ResourceTranslator implements Translator {
 
     @Override
     public String translate(String template, Object[] parameters) {
-        if(template == null) throw new IllegalArgumentException("template cannot be null");
-        if(parameters == null) throw new IllegalArgumentException("parameters cannot be null");
+        if (template == null) throw new IllegalArgumentException("template cannot be null");
+        if (parameters == null) throw new IllegalArgumentException("parameters cannot be null");
 
         final Locale currentLocale = VaadinSession.getCurrent().getLocale();
 
