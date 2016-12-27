@@ -4,8 +4,6 @@ import com.vaadin.ui.Component;
 
 import org.vaadin.i18n.annotation.Caption;
 
-import java.util.Collection;
-
 /**
  * Translator is a provider of translations for any input String, which may or may not be dependent
  * on the current context. The Translator itself is responsible of choosing the correct current
@@ -23,5 +21,5 @@ public interface Translator {
      * @param parameters the parameters for this template
      * @return the translation
      */
-    String translate(String template, Collection<Object> parameters);
+    String translate(String template, Object[] parameters);
 }

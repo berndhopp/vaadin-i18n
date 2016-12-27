@@ -4,7 +4,6 @@ import com.vaadin.server.VaadinSession;
 
 import org.vaadin.i18n.api.Translator;
 
-import java.util.Collection;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,7 +25,10 @@ public class ResourceTranslator implements Translator {
     }
 
     @Override
-    public String translate(String template, Collection<Object> parameters) {
+    public String translate(String template, Object[] parameters) {
+        if(template == null) throw new IllegalArgumentException("template cannot be null");
+        if(parameters == null) throw new IllegalArgumentException("parameters cannot be null");
+
         final Locale currentLocale = VaadinSession.getCurrent().getLocale();
 
         if (oldLocale == null || !oldLocale.equals(currentLocale)) {
@@ -36,8 +38,8 @@ public class ResourceTranslator implements Translator {
 
         final String resource = resourceBundle.getString(template);
 
-        return !parameters.isEmpty()
-                ? format(currentLocale, resource, parameters.toArray())
-                : resource;
+        return parameters.length == 0
+                ? resource
+                : format(currentLocale, resource, parameters);
     }
 }
