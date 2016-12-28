@@ -7,6 +7,7 @@ import com.vaadin.ui.Component;
  *
  * @author Bernd Hopp bernd@vaadin.com
  */
+@SuppressWarnings("unused")
 public interface TranslationBinder {
 
     /**

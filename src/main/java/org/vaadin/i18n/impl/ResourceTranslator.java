@@ -13,6 +13,7 @@ import static java.lang.String.format;
  * a 'default'- or reference-implementation of a translator that
  * uses resource-bundles
  */
+@SuppressWarnings("unused")
 public class ResourceTranslator implements Translator {
 
     private final String resourceName;
