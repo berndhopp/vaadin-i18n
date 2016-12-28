@@ -7,5 +7,5 @@ import com.vaadin.ui.Component;
  */
 @SuppressWarnings("unused")
 public interface HasParameters extends Component {
-    Object[] parameters();
+    Object[] getParameters();
 }
