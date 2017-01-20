@@ -1,13 +1,13 @@
 package org.vaadin.i18n.impl;
 
 import com.vaadin.server.VaadinSession;
-
 import org.vaadin.i18n.api.Translator;
 
+import java.text.MessageFormat;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-
-import static java.lang.String.format;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * a 'default'- or reference-implementation of a translator that
@@ -18,7 +18,7 @@ public class ResourceTranslator implements Translator {
 
     private final String resourceName;
     private Locale oldLocale;
-    private ResourceBundle resourceBundle;
+    private static final Map<Locale, Map<String, MessageFormat>> messageFormats = new ConcurrentHashMap<Locale, Map<String, MessageFormat>>();
 
     /**
      * @param resourceBundle the name of the {@link ResourceBundle} to use
@@ -39,15 +39,33 @@ public class ResourceTranslator implements Translator {
 
         final Locale currentLocale = VaadinSession.getCurrent().getLocale();
 
+        Map<String, MessageFormat> messageFormatMap;
+
         if (oldLocale == null || !oldLocale.equals(currentLocale)) {
-            resourceBundle = ResourceBundle.getBundle(resourceName, currentLocale);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle(resourceName, currentLocale);
+
+            messageFormatMap = messageFormats.get(currentLocale);
+
+            if (messageFormatMap == null) {
+                messageFormatMap = new ConcurrentHashMap<String, MessageFormat>(resourceBundle.keySet().size());
+                for (String key : resourceBundle.keySet()) {
+                    messageFormatMap.put(key, new MessageFormat(resourceBundle.getString(key), currentLocale));
+                }
+
+                messageFormats.put(currentLocale, messageFormatMap);
+            }
+
             oldLocale = currentLocale;
+        } else {
+            messageFormatMap = messageFormats.get(currentLocale);
         }
 
-        final String resource = resourceBundle.getString(template);
+        MessageFormat messageFormat = messageFormatMap.get(template);
 
-        return parameters.length == 0
-                ? resource
-                : format(currentLocale, resource, parameters);
+        if(messageFormat == null){
+            throw new IllegalArgumentException("template " + template + " not defined");
+        }
+
+        return messageFormat.format(parameters);
     }
 }

@@ -6,6 +6,6 @@ import com.vaadin.ui.Component;
  * A component that is providing parameters for it's {@link Translator#translate(String, Object[])}
  */
 @SuppressWarnings("unused")
-public interface HasParameters extends Component {
-    Object[] getParameters();
+public interface HasCaptionParameters extends Component {
+    Object[] getCaptionParameters();
 }
