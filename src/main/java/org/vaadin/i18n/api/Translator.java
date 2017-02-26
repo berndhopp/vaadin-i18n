@@ -1,7 +1,6 @@
 package org.vaadin.i18n.api;
 
 import com.vaadin.ui.Component;
-
 import org.vaadin.i18n.annotation.Caption;
 
 /**

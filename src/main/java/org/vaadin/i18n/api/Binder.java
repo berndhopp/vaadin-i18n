@@ -1,6 +1,5 @@
 package org.vaadin.i18n.api;
 
-import com.vaadin.data.Property;
 import com.vaadin.ui.Component;
 
 /**
@@ -8,6 +7,7 @@ import com.vaadin.ui.Component;
  *
  * @author Bernd Hopp bernd@vaadin.com
  */
+@SuppressWarnings("unused")
 public interface Binder {
 
     Bind bind(Component... components);
@@ -17,15 +17,11 @@ public interface Binder {
     interface Bind extends Terminate{
         Bind toCaption(String template);
         Bind toDescription(String template);
-        Bind toValue(Property<?> property);
-        Bind toInputPrompt(String template);
     }
 
     interface Unbind extends Terminate{
         Unbind fromCaption();
         Unbind fromDescription();
-        Unbind fromValue();
-        Unbind fromInputPrompt();
         Terminate fromAll();
     }
 
