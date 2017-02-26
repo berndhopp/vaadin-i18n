@@ -1,14 +1,9 @@
 package org.vaadin.i18n.annotation;
 
 import com.vaadin.ui.Component;
-
 import org.vaadin.i18n.api.Translator;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

@@ -11,10 +11,12 @@ import com.vaadin.ui.Component;
 public interface Binder {
 
     Bind bind(Component component);
+
     Terminate unbind(Component... components);
 
-    interface Bind extends Terminate{
+    interface Bind extends Terminate {
         Bind toCaption(String template);
+
         Bind toDescription(String template);
     }
 
