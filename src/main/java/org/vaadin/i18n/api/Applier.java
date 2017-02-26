@@ -8,7 +8,7 @@ public interface Applier {
      * Component in the current {@link com.vaadin.ui.UI}'s scope and feed these translations to the
      * {@link com.vaadin.ui.Component#setCaption(String)} methods of the annotated objects.
      */
-    Binder applyAll();
+    void applyAll();
 
     /**
      * calling this method will ask the currently used {@link Translator} for translations of
@@ -17,5 +17,5 @@ public interface Applier {
      * @param component the component to be translated
      * @throws IllegalArgumentException if the component is not registered
      */
-    Binder apply(Component... component);
+    void apply(Component... component);
 }

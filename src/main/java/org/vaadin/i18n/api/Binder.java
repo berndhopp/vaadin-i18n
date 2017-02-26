@@ -10,22 +10,15 @@ import com.vaadin.ui.Component;
 @SuppressWarnings("unused")
 public interface Binder {
 
-    Bind bind(Component... components);
-
-    Unbind unbind(Component... components);
+    Bind bind(Component component);
+    Terminate unbind(Component... components);
 
     interface Bind extends Terminate{
         Bind toCaption(String template);
         Bind toDescription(String template);
     }
 
-    interface Unbind extends Terminate{
-        Unbind fromCaption();
-        Unbind fromDescription();
-        Terminate fromAll();
-    }
-
     interface Terminate {
-        Binder and();
+        Binder then();
     }
 }

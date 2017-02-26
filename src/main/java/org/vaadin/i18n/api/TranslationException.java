@@ -1,6 +1,6 @@
 package org.vaadin.i18n.api;
 
-public class TranslationException extends Exception {
+public class TranslationException extends RuntimeException {
     public TranslationException() {
     }
 
