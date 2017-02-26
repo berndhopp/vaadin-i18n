@@ -20,5 +20,5 @@ public interface Translator {
      *                   resolve
      * @return the translation
      */
-    String translate(String template);
+    String translate(String template) throws TranslationException;
 }
